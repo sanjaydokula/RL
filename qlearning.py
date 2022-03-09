@@ -22,8 +22,8 @@ epsilon_decay_value = epsilon/(end_epsilon_decay - start_epsilon_decay)
 discrete_obs_size = [10] * len(env.observation_space.low)
 print(env.observation_space.high)
 print(env.observation_space.low)
-# discrete_obs_wind_size = (env.observation_space.high - env.observation_space.low) / discrete_obs_size
-discrete_obs_wind_size = (np.array([m.pow(2,31)]*8) - (np.array([-m.pow(2,31)]*8))) / discrete_obs_size
+discrete_obs_wind_size = (env.observation_space.high - env.observation_space.low) / discrete_obs_size
+# discrete_obs_wind_size = (np.array([m.pow(2,31)]*8) - (np.array([-m.pow(2,31)]*8))) / discrete_obs_size
 # print(discrete_obs_size)
 # print(discrete_obs_wind_size)
 q_table = np.random.uniform(low=-2, high=0, size=(discrete_obs_size + [env.action_space.n]))
