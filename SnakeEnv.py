@@ -110,8 +110,8 @@ class SnakeEnv(gym.Env):
             font = cv2.FONT_HERSHEY_SIMPLEX
             self.image = np.zeros((500,500,3),dtype='uint8')
             cv2.putText(self.image,'Your Score is {}'.format(self.score),(140,250), font, 1,(255,255,255),2,cv2.LINE_AA)
-            cv2.imshow('a',self.image)
-            cv2.waitKey(100)
+            cv2.imshow('Snake',self.image)
+            # cv2.waitKey(100)
             self.done = True
 
             # self.total_reward = len(self.snake_position) - 3
