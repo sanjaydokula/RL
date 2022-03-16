@@ -51,7 +51,7 @@ class SnakeEnv(gym.Env):
 
     def step(self, action):
         self.prev_actions.append(action)
-        cv2.imshow("a",self.image)
+        cv2.imshow("Snake",self.image)
         cv2.waitKey(1)
         self.image = np.zeros((500,500,3),dtype='uint8')
 
@@ -124,7 +124,7 @@ class SnakeEnv(gym.Env):
             # self.reward = self.total_reward - self.prev_reward
             # self.prev_reward = self.total_reward
         if self.done:
-            self.total_reward = -1000
+            self.total_reward = -10
         info = {}
 
 
@@ -147,7 +147,7 @@ class SnakeEnv(gym.Env):
     def reset(self):
         self.image = np.zeros((500,500,3),dtype='uint8')
         self.snake_position = [[250,250],[240,250],[230,250]]
-        self.apple_position = [np.random.randint(low=1,high=100)*5,np.random.randint(low=1,high=100)*5]    
+        self.apple_position = [np.random.randint(low=1,high=50)*10,np.random.randint(low=1,high=50)*10]    
         self.score = 0
         self.reward = 0
         self.previous_button_direction = 1

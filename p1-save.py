@@ -25,7 +25,7 @@ if not os.path.exists(models_dir):
 
 env.reset()
 
-TIMESTEPS = 10000
+TIMESTEPS = 30000
 
 model = PPO("MlpPolicy", env, verbose=1, tensorboard_log=logidr)
 
