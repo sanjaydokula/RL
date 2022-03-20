@@ -8,13 +8,13 @@ from SnakeEnv import SnakeEnv
 import cv2
 
 
-models_dir = "models/PPO-1646917910"
-model_path = f"{models_dir}/970000.zip"
+models_dir = "models/PPO-1647365718"
+model_path = f"{models_dir}/1920000.zip"
+
 env = SnakeEnv()
 env.reset()
 
 model = PPO.load(model_path, env=env)
-
 episodes = 50
 
 for ep in range(episodes):
