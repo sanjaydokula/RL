@@ -9,8 +9,9 @@ import time
 from SnakeEnv import SnakeEnv
 
 
-env = SnakeEnv()
-model_name = "PPO"
+# env = SnakeEnv()
+env = gym.make("MountainCar-v0")
+model_name = "PPO-Mount"
 models_dir = f"models/{model_name}-{int(time.time())}"
 logidr = f"logs/{model_name}-{int(time.time())}"
 
@@ -25,7 +26,7 @@ if not os.path.exists(models_dir):
 
 env.reset()
 
-TIMESTEPS = 30000
+TIMESTEPS = 10000
 
 model = PPO("MlpPolicy", env, verbose=1, tensorboard_log=logidr)
 

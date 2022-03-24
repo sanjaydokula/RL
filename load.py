@@ -8,10 +8,10 @@ from SnakeEnv import SnakeEnv
 import cv2
 
 
-models_dir = "models/PPO-1647365718"
-model_path = f"{models_dir}/1920000.zip"
+models_dir = "models/PPO-Mount-1648073342"
+model_path = f"{models_dir}/990000.zip"
 
-env = SnakeEnv()
+env = gym.make("MountainCar-v0")
 env.reset()
 
 model = PPO.load(model_path, env=env)
@@ -22,8 +22,8 @@ for ep in range(episodes):
     done = False
 
     while not done:
-        # env.render()
+        env.render()
         action, _ = model.predict(obs)
         obs, reward, done, info = env.step(action)
-        cv2.waitKey(50)
+        cv2.waitKey(1)
 env.close()

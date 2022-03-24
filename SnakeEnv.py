@@ -51,19 +51,20 @@ class SnakeEnv(gym.Env):
 
     def step(self, action):
         self.prev_actions.append(action)
-        cv2.imshow("Snake",self.image)
-        cv2.waitKey(1)
-        self.image = np.zeros((500,500,3),dtype='uint8')
+        # cv2.imshow("Snake",self.image)
+        # cv2.waitKey(50)
+        # self.image = np.zeros((500,500,3),dtype='uint8')
 
-        # test the tuple(self.apple_position) in rectangle
-        cv2.rectangle(self.image,(self.apple_position[0],self.apple_position[1]),(self.apple_position[0]+10,self.apple_position[1]+10),(0,0,255),3)
+        # # test the tuple(self.apple_position) in rectangle
+        # cv2.rectangle(self.image,(self.apple_position[0],self.apple_position[1]),(self.apple_position[0]+10,self.apple_position[1]+10),(0,0,255),3)
 
-        for pos in self.snake_position:
+        # for pos in self.snake_position:
             # print("snek")
-            cv2.rectangle(self.image,(pos[0],pos[1]),(pos[0]+10,pos[1]+10),(0,255,0),3)
-            # print(self.snake_position)
-            # cv2.waitKey(1000)
+            # cv2.rectangle(self.image,(pos[0],pos[1]),(pos[0]+10,pos[1]+10),(0,255,0),3)
+        #     # print(self.snake_position)
+        #     # cv2.waitKey(1000)
 
+        self.render()
         time_to_take_step = time.time() + 0.05
         k= -1
         while time.time() > time_to_take_step:
@@ -171,3 +172,12 @@ class SnakeEnv(gym.Env):
         self.observation = [head_x, head_y, apple_delta_x, apple_delta_y, snake_length] + list(self.prev_actions)
         self.observation = np.array(self.observation)
         return self.observation  # reward, done, info can't be included
+
+    def render(self):
+        cv2.imshow("Snake",self.image)
+        cv2.waitKey(50)
+        self.image = np.zeros((500,500,3),dtype='uint8')
+        cv2.rectangle(self.image,(self.apple_position[0],self.apple_position[1]),(self.apple_position[0]+10,self.apple_position[1]+10),(0,0,255),3)
+        for pos in self.snake_position:
+            # print("snek")
+            cv2.rectangle(self.image,(pos[0],pos[1]),(pos[0]+10,pos[1]+10),(0,255,0),3)
