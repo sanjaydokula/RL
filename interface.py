@@ -81,7 +81,7 @@ class Window(QMainWindow):
         file,wot = QFileDialog.getOpenFileName(self,"open model","~","model files(*.zip)")
         print(wot)
         self.filename = QFileInfo(file).fileName()
-        print(type(self.filename))
+        print(type(self.filename[:-4]))
         print(self.filename[:-4])
         self.model = Model(self.filename,self.envName)
 
