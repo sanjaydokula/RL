@@ -1,4 +1,3 @@
-from ast import arg
 from cgitb import reset
 from re import M
 import torch
@@ -16,17 +15,10 @@ class Model():
 
     def __init__(self,*args):
 
-        self.models_dir = "models/PPO-1647365718"
+        # self.models_dir = "models/PPO-1647365718"
         # self.env = SnakeEnv()
-        if len(args)>0 and isinstance(args[0],str):
-            print("1 arg and model arg")
-            print(f"Selecting {args[0]} model")
-            self.model_name = args[0]
-        else:
-            print("selecting default model")
-            self.model_name = "1920000.zip"
 
-        self.model_path = f"{self.models_dir}/{self.model_name}"
+        # self.model_path = f"{self.models_dir}/{self.model_name}"
 
         if len(args)>1 and isinstance(args[1],str):
             print("2 arg and env arg")
@@ -37,23 +29,33 @@ class Model():
                 print("selecting mountain car env")
                 self.env = gym.make("MountainCar-v0")
         else:
-            print("default env selecting")
+            print("selecting default env")
             self.env = SnakeEnv()
             self.env.reset()
 
+        if len(args)>0 and isinstance(args[0],str):
+            print("1 arg and model arg")
+            print(f"Selecting {args[0]} model")
+            self.model_name = args[0]
+        else:
+            print("selecting default model")
+            self.model_name = "models/PPO-1647365718/1920000.zip"
+
+        self.model_path = self.model_name
         self.model = PPO.load(self.model_path, env=self.env)
         self.episodes = 50
 
-        
+    
     def run(self):
         for ep in range(self.episodes):
             obs = self.env.reset()
             done = False
             while not done:
-                # env.render()
+                self.env.render()
                 action, _ = self.model.predict(obs)
                 obs, reward, done, info = self.env.step(action)
                 key = cv2.waitKey(50)
                 if key == ord('q'):
-                    sys.exit()
-        self.env.close()
+                    # sys.exit()
+                    self.env.close()
+        # self.env.close()

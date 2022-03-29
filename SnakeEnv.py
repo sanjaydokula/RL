@@ -6,6 +6,7 @@ import numpy as np
 import random
 import time
 from collections import deque
+import sys
 
 SNAKE_LEN_GOAL = 50
 
@@ -64,7 +65,7 @@ class SnakeEnv(gym.Env):
         #     # print(self.snake_position)
         #     # cv2.waitKey(1000)
 
-        self.render()
+        # self.render()
         time_to_take_step = time.time() + 0.05
         k= -1
         while time.time() > time_to_take_step:
@@ -181,3 +182,5 @@ class SnakeEnv(gym.Env):
         for pos in self.snake_position:
             # print("snek")
             cv2.rectangle(self.image,(pos[0],pos[1]),(pos[0]+10,pos[1]+10),(0,255,0),3)
+    def close(self):
+        sys.exit()

@@ -73,9 +73,9 @@ for episode in range(episodes):
         new_state, reward, done, info = env.step(action)
         new_discrete_state = get_discrete_state(new_state)
         episode_reward+=reward
-        
-        # if render:
-        #     env.render()
+        # print(new_state)
+        if render:
+            env.render()
         if not done:
             max_future_q = np.max(q_table[new_discrete_state])
             current_q = q_table[discrete_state + (action,)]

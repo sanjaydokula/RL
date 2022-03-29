@@ -1,12 +1,15 @@
-from multiprocessing import set_forkserver_preload
-from os import fork
-from re import L
 import cv2
 import gym
 from gym import spaces
 import numpy as np
 print("env starting")
 
+
+colors = {
+    'b':(255,0,0),
+    'g':(0,255,0),
+    'r':(0,0,255)
+}
 
 def collision_with_package(fork_position,package_position):
     if abs(fork_position[0] - package_position[0] ) == 10 and (fork_position[1] == package_position[1]) or abs(fork_position[1]+10):
@@ -74,13 +77,14 @@ class WareHouseEnv(gym.Env):
 
 
         self.observation = [fork_x,fork_y,package_delta_x,package_delta_y]
-        cv2.rectangle(self.image,(self.fork_position[0],self.fork_position[1]),(self.fork_position[0]+10,self.fork_position[1]+10),(255,0,0),3,lineType=cv2.LINE_AA)
-        cv2.rectangle(self.image,(self.package[0],self.package[1]),(self.package[0]+10,self.package[1]+10),(0,255,0),3,lineType=cv2.LINE_AA)
+        cv2.rectangle(self.image,(self.fork_position[0],self.fork_position[1]),(self.fork_position[0]+10,self.fork_position[1]+10),colors.get('b'),3,lineType=cv2.LINE_AA)
+        cv2.rectangle(self.image,(self.package[0],self.package[1]),(self.package[0]+10,self.package[1]+10),colors.get('g'),3,lineType=cv2.LINE_AA)
         
-        cv2.rectangle(self.image,(self.dest_position[0],self.dest_position[1]),(self.dest_position[0]+100,self.dest_position[1]+100),(0,255,0),3,lineType=cv2.LINE_AA)
+        cv2.rectangle(self.image,(self.dest_position[0],self.dest_position[1]),(self.dest_position[0]+100,self.dest_position[1]+100),colors.get('g'),3,lineType=cv2.LINE_AA)
         cv2.imshow("warehouse",self.image)
         cv2.waitKey(500)
 
 warehouse = WareHouseEnv()
-
+print(colors.get('b'))
 warehouse.reset()
+cv2.waitKey(10000)

@@ -8,10 +8,11 @@ from SnakeEnv import SnakeEnv
 import cv2
 
 
-models_dir = "models/PPO-Mount-1648073342"
-model_path = f"{models_dir}/990000.zip"
+models_dir = "models/PPO-1647365718"
+model_path = f"{models_dir}/60000.zip"
 
-env = gym.make("MountainCar-v0")
+# env = gym.make("MountainCar-v0")
+env = SnakeEnv()
 env.reset()
 
 model = PPO.load(model_path, env=env)
