@@ -32,9 +32,7 @@ def collision_with_self(snake_position):
 
 
 N_DISCRETE_ACTIONS = 4
-N_CHANNELS = None
-HEIGHT = None
-WIDTH = None
+
 
 class SnakeEnv(gym.Env):
     """Custom Environment that follows gym interface"""
