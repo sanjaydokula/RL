@@ -111,6 +111,10 @@ class SnakeEnv(gym.Env):
             self.image = np.zeros((500,500,3),dtype='uint8')
             cv2.putText(self.image,'Your Score is {}'.format(self.score),(140,250), font, 1,(255,255,255),2,cv2.LINE_AA)
             cv2.imshow('Snake',self.image)
+            if collision_with_boundaries(self.snake_head):
+                print("boundaries")
+            elif collision_with_self(self.snake_position):
+                print("self")
             # cv2.waitKey(100)
             self.done = True
 
@@ -125,6 +129,7 @@ class SnakeEnv(gym.Env):
             # self.prev_reward = self.total_reward
         if self.done:
             self.total_reward = -10
+            cv2.waitKey(10000)
         info = {}
 
 
@@ -148,7 +153,7 @@ class SnakeEnv(gym.Env):
         self.image = np.zeros((500,500,3),dtype='uint8')
         self.snake_position = [[250,250],[240,250],[230,250]]
         self.apple_position = [np.random.randint(low=1,high=50)*10,np.random.randint(low=1,high=50)*10]    
-        self.score = 0
+        self.score = 3
         self.reward = 0
         self.previous_button_direction = 1
         self.button_direction = 1
