@@ -9,9 +9,9 @@ import time
 from SnakeEnv import SnakeEnv
 
 
-# env = SnakeEnv()
-env = gym.make("MountainCar-v0")
-model_name = "PPO-Mount"
+env = SnakeEnv()
+# env = gym.make("MountainCar-v0")
+model_name = "PPO"
 models_dir = f"models/{model_name}-{int(time.time())}"
 logidr = f"logs/{model_name}-{int(time.time())}"
 
